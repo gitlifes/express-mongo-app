@@ -4,7 +4,7 @@ const path = require('path')
 const exphbs = require('express-handlebars')
 const todoRoutes = require('./routes/todos')
 const bodyParser = require('body-parser')
-
+require('dotenv').config()
 
 const PORT = process.env.PORT || 3000
 
@@ -39,8 +39,8 @@ app.use(todoRoutes)
 
 async function start( ) {
   try{
-    
-    await mongoose.connect('mongodb+srv://sergey:admin@cluster0.mjwxz05.mongodb.net/todos')
+    console.log(process.env.MONGO_CONNECTION_LINK)
+    await mongoose.connect(process.env.MONGO_CONNECTION_LINK)
 
     app.listen(PORT, () => {
       console.log('running...')
